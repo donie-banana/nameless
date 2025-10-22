@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7b0yjicoe2oo"]
+
+[ext_resource type="Script" uid="uid://bcsv0cbk10h8g" path="res://scripts/player.gd" id="1_3qslp"]
+[ext_resource type="Script" uid="uid://jkjlsr2apc0q" path="res://scripts/sfx/bg_music.gd" id="2_8jcnj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bnwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_da457"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qhqgy"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_3qslp")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29999995, 0)
+visible = false
+light_energy = 16.0
+light_size = 7.955
+light_specular = 0.26
+spot_range = 27.762651
+spot_angle = 32.95076
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1bnwu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_qhqgy")
+mesh = SubResource("CapsuleMesh_da457")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_8jcnj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_qhqgy")
